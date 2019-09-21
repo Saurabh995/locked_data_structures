@@ -28,7 +28,7 @@ typedef struct __my_args_t{
 
 void init(counter_t *c){
     c->value =0;
-    pthread_mutex_init(&c->lock,NULL); <#const pthread_mutexattr_t *restrict _Nullable#>)
+    pthread_mutex_init(&c->lock,NULL);
 }
 void increment(counter_t *c){
     pthread_mutex_lock(&c->lock);
@@ -67,10 +67,10 @@ int main(){
         args.threads = i;
         gettimeofday(&start, NULL);
         for(int j=0;j<i;j++){
-            pthread_create(&threads[j], NULL, myfunc, &args);
+            pthread_create(&threads[j], NULL, &myfunc, &args);
         }
         for(int j=0; j<i;j++){
-            pthread_join(threads[j],NULL); <#void * _Nullable * _Nullable#>)
+            pthread_join(threads[j],NULL); 
         }
         gettimeofday(&end, NULL);
         printf("%d threads\n",i);
@@ -79,5 +79,6 @@ int main(){
     }
     return 0;
 }
+
 
 
